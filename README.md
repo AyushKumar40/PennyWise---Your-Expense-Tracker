@@ -28,3 +28,6 @@ A full-stack expense tracking app built with **React + Tailwind CSS** (frontend)
 - Loading states and error banners
 
 A small test.js is added to test the database actions, wether the data is created deleted etc. How do i wrote this? I didn't. I took asked this code from Chatgpt.
+
+Backend is completed.
+Jumping to frontend and making the components.

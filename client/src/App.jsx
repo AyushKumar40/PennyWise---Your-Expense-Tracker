@@ -1,5 +1,11 @@
+import CategoryChart from "./components/CategoryChart";
+
 function App() {
-  return <div>Hello</div>;
+  return (
+    <div>
+      <CategoryChart />
+    </div>
+  );
 }
 
 export default App;

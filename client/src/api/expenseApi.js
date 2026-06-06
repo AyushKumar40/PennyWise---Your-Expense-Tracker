@@ -10,7 +10,7 @@ async function request(path, options = {}) {
 
   if (!res.ok) {
     const message =
-      data.errors?.join(",") || data.message || `HTTP ${res.status}`;
+      data.errors?.join(", ") || data.message || `HTTP ${res.status}`;
     throw new Error(message);
   }
   return data;

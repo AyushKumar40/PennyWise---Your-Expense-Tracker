@@ -31,3 +31,48 @@ A small test.js is added to test the database actions, wether the data is create
 
 Backend is completed.
 Jumping to frontend and making the components.
+
+## Project Structure
+
+```
+expense-tracker/
+├── server/                   # Node.js + Express API
+│   ├── src/
+│   │   ├── app.js             # Entry point, Express setup
+│   │   ├── controllers/
+│   │   │   └── expenseController.js   # Request handlers
+│   │   ├── routes/
+│   │   │   └── expenseRoutes.js       # Route definitions
+│   │   ├── models/
+│   │   │   └── expenseModel.js        # All SQL queries
+│   │   ├── middleware/
+│   │   │   └── validateExpense.js     # Input validation
+│   │   └── db/
+│   │       └── database.js            # SQLite init + persistence
+│   ├── data/                  # Auto-created; holds expenses.db
+│   └── .env
+│
+├── client/                  # React + Vite + Tailwind
+│   ├── src/
+│   │   ├── api/
+│   │   │   └── expenseApi.js          # All API calls
+│   │   ├── components/
+│   │   │   ├── ExpenseForm.jsx        # Add / edit modal
+│   │   │   ├── ExpenseTable.jsx       # Transactions list
+│   │   │   ├── FilterBar.jsx          # Category + date filters
+│   │   │   ├── SummaryPanel.jsx       # Totals + per-category
+│   │   │   ├── CategoryChart.jsx      # Recharts pie & bar
+│   │   │   └── BudgetManager.jsx      # Budget settings
+│   │   ├── hooks/
+│   │   │   └── useExpenses.js         # State + data fetching
+│   │   ├── utils/
+│   │   │   ├── currency.js            # ₹ formatting
+│   │   │   ├── dateHelpers.js         # Date range helpers
+│   │   │   └── csvExport.js           # CSV download
+│   │   ├── constants/
+│   │   │   └── categories.js          # Category list + colors
+│   │   ├── App.jsx                    # Root component
+│   │   └── main.jsx                   # ReactDOM entry
+│   └── ...config files
+│
+└── README.md

@@ -1,4 +1,4 @@
-const { VALID_CATEGORIES } = REQUIRE("../models/expenseModel");
+const { VALID_CATEGORIES } = require("../models/expenseModel");
 
 // Validating Expenses
 function validateExpense(req, res, next) {

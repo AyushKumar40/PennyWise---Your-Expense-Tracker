@@ -39,7 +39,6 @@ export default function ExpenseTable({ expenses, onEdit, onDelete, loading }) {
 
   return (
     <div className="card overflow-hidden fade-in">
-      {/* Desktop table */}
       <div className="hidden sm:block overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
@@ -128,7 +127,6 @@ export default function ExpenseTable({ expenses, onEdit, onDelete, loading }) {
         </table>
       </div>
 
-      {/* Mobile card list */}
       <div className="sm:hidden divide-y divide-ink-100">
         {expenses.map((expense) => (
           <div key={expense.id} className="p-4">
@@ -190,7 +188,6 @@ export default function ExpenseTable({ expenses, onEdit, onDelete, loading }) {
         ))}
       </div>
 
-      {/* Row count */}
       <div className="border-t border-ink-100 px-4 py-2 bg-ink-50 text-xs text-ink-400 text-right">
         {expenses.length} {expenses.length === 1 ? "record" : "records"}
       </div>

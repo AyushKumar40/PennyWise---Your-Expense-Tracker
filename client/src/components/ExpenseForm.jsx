@@ -20,46 +20,43 @@ export default function ExpenseForm({
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    const t = setTimeout(() => {
-      if (expense) {
-        setForm({
-          amount: String(expense.amount),
-          category: expense.category,
-          date: expense.date,
-          note: expense.note || "",
-        });
-      } else {
-        setForm(EMPTY_FORM);
-      }
-      setErrors({});
-    }, 0);
-
-    return () => clearTimeout(t);
+    if (expense) {
+      setForm({
+        amount: String(expense.amount),
+        category: expense.category,
+        date: expense.date,
+        note: expense.note || "",
+      });
+    } else {
+      setForm(EMPTY_FORM);
+    }
+    setErrors({});
   }, [expense]);
 
   function validate() {
     const newErrors = {};
 
     const parsedAmount = parseFloat(form.amount);
-    if (!form.account || isNaN(parsedAmount)) {
-      newErrors.amount = "Amount is required";
+    if (!form.amount || isNaN(parsedAmount)) {
+      newErrors.amount = "Amount is required.";
     } else if (parsedAmount <= 0) {
-      newErrors.amount = "Amount must be greater than 0";
+      newErrors.amount = "Amount must be greater than 0.";
     }
 
     if (!form.category) {
-      newErrors.category = "Please select a category";
+      newErrors.category = "Please select a category.";
     }
 
     if (!form.date) {
-      newErrors.date = "Date is required";
+      newErrors.date = "Date is required.";
     } else if (form.date > todayString()) {
-      newErrors.date = "Date cannot be in the future";
+      newErrors.date = "Date cannot be in the future.";
     }
 
     if (form.note.length > 200) {
       newErrors.note = "Note must be under 200 characters.";
     }
+
     return newErrors;
   }
 
@@ -77,6 +74,7 @@ export default function ExpenseForm({
       date: form.date,
       note: form.note.trim(),
     });
+
     if (result?.success === false) {
       setErrors({ _general: result.message });
     }
@@ -88,7 +86,6 @@ export default function ExpenseForm({
   }
 
   return (
-    /* Backdrop */
     <div
       className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4"
       style={{
@@ -126,7 +123,6 @@ export default function ExpenseForm({
         {/* Form */}
         <form onSubmit={handleSubmit} noValidate>
           <div className="p-5 space-y-4">
-            {/* General error */}
             {errors._general && (
               <div className="bg-rose-50 border border-rose-200 text-rose-700 px-3 py-2 rounded-lg text-sm">
                 {errors._general}

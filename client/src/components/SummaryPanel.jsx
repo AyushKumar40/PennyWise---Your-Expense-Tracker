@@ -1,5 +1,5 @@
 import { formatCurrency } from "../utils/currency";
-import { formatDate, monthYearLabel } from "../utils/dateHelpers";
+import { formatDate } from "../utils/dateHelpers";
 import { CATEGORY_COLORS, CATEGORY_ICONS } from "../constants/categories";
 
 export default function SummaryPanel({ summary, filters, budgets }) {
@@ -7,7 +7,6 @@ export default function SummaryPanel({ summary, filters, budgets }) {
 
   const { grandTotal, highestExpense, byCategory } = summary;
 
-  // Build budget map for quick lookup
   const budgetMap = {};
   budgets?.forEach((b) => {
     budgetMap[b.category] = b.amount;
@@ -20,7 +19,6 @@ export default function SummaryPanel({ summary, filters, budgets }) {
 
   return (
     <div className="space-y-4">
-      {/* Grand total card */}
       <div className="card p-5 bg-ink-900 text-white">
         <p className="text-xs font-medium text-ink-400 uppercase tracking-wide mb-1">
           Total Spent
@@ -31,7 +29,6 @@ export default function SummaryPanel({ summary, filters, budgets }) {
         <p className="text-xs text-ink-400 mt-1">{periodLabel}</p>
       </div>
 
-      {/* Highest expense */}
       {highestExpense && (
         <div className="card p-4">
           <p className="text-xs font-medium text-ink-500 uppercase tracking-wide mb-2">
@@ -54,7 +51,6 @@ export default function SummaryPanel({ summary, filters, budgets }) {
         </div>
       )}
 
-      {/* Per-category breakdown */}
       {byCategory.length > 0 && (
         <div className="card p-4">
           <p className="text-xs font-medium text-ink-500 uppercase tracking-wide mb-3">
@@ -92,7 +88,6 @@ export default function SummaryPanel({ summary, filters, budgets }) {
                     </div>
                   </div>
 
-                  {/* Budget progress bar */}
                   {pct !== null && (
                     <div className="h-1.5 bg-ink-100 rounded-full overflow-hidden">
                       <div

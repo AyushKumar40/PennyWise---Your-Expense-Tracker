@@ -18,7 +18,7 @@ import { formatCurrency, formatCurrencyCompact } from "../utils/currency";
 export default function CategoryChart({ summary }) {
   const [chartType, setChartType] = useState("pie");
 
-  if (!summary || summary.byCategory || summary.byCategory.length === 0) {
+  if (!summary || !summary.byCategory || summary.byCategory.length === 0) {
     return (
       <div className="card p-6 text-center text-ink-400">
         <p className="text-2xl mb-2">📊</p>

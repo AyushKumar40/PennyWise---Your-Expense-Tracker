@@ -1,3 +1,114 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        @apply bg-ink-50 text-ink-900 font-body antialiased;
+        background-image:
+            radial-gradient(circle at 20% 80%, rgba(16, 185, 129, 0.04) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.04) 0%, transparent 50%);
+        min-height: 100vh;
+    }
+
+    h1,
+    h2,
+    h3 {
+        @apply font-display;
+    }
+}
+
+@layer components {
+    .btn-primary {
+        @apply bg-ink-900 text-ink-50 font-body font-medium px-4 py-2 rounded-lg hover:bg-ink-700 active:scale-95 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed text-sm;
+    }
+
+    .btn-secondary {
+        @apply bg-white text-ink-700 font-body font-medium px-4 py-2 rounded-lg border border-ink-200 hover:bg-ink-50 active:scale-95 transition-all duration-150 text-sm;
+    }
+
+    .btn-danger {
+        @apply bg-rose-500 text-white font-body font-medium px-4 py-2 rounded-lg hover:bg-rose-600 active:scale-95 transition-all duration-150 text-sm;
+    }
+
+    .input-field {
+        @apply w-full px-3 py-2 rounded-lg border border-ink-200 bg-white text-ink-900 text-sm font-body placeholder-ink-400 focus:outline-none focus:ring-2 focus:ring-ink-900 focus:border-transparent transition-all duration-150;
+    }
+
+    .card {
+        @apply bg-white rounded-xl border border-ink-100 shadow-sm;
+    }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-ink-300 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-ink-400;
+}
+
+/* Modal animation */
+@keyframes modalIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-enter {
+    animation: modalIn 0.2s ease-out forwards;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Pulse animation for budget warning */
+@keyframes pulse-soft {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.pulse-soft {
+    animation: pulse-soft 2s ease-in-out infinite;
+}

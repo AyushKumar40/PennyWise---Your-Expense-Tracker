@@ -3,7 +3,7 @@ import { CATEGORIES, CATEGORY_ICONS } from "../constants/categories";
 import { formatCurrency } from "../utils/currency";
 
 export default function BudgetManager({ budgets, onSave, onRemove }) {
-  const [editing, setEditing] = useState(null);
+  const [editing, setEditing] = useState(null); 
   const [value, setValue] = useState("");
   const [error, setError] = useState("");
 
@@ -21,7 +21,7 @@ export default function BudgetManager({ budgets, onSave, onRemove }) {
   async function handleSave(category) {
     const parsed = parseFloat(value);
     if (!value || isNaN(parsed) || parsed <= 0) {
-      setError("Enter a positive amount");
+      setError("Enter a positive amount.");
       return;
     }
     const result = await onSave(category, parsed);
@@ -43,7 +43,7 @@ export default function BudgetManager({ budgets, onSave, onRemove }) {
   return (
     <div className="card p-4">
       <p className="text-xs font-medium text-ink-500 uppercase tracking-wide mb-3">
-        Monthly Budgets
+        💰 Monthly Budgets
       </p>
       <div className="space-y-2">
         {CATEGORIES.map((category) => {
@@ -67,11 +67,14 @@ export default function BudgetManager({ budgets, onSave, onRemove }) {
                     step="100"
                     value={value}
                     onChange={(e) => {
+                      setValue(e.target.value);
+                      setError("");
+                    }}
+                    onKeyDown={(e) => {
                       if (e.key === "Enter") handleSave(category);
                       if (e.key === "Escape") handleCancel();
                     }}
-                    className="input-field w-24 text-xs py-1px2
-                    "
+                    className="input-field w-24 text-xs py-1 px-2"
                     autoFocus
                     placeholder="e.g. 5000"
                   />
@@ -93,7 +96,7 @@ export default function BudgetManager({ budgets, onSave, onRemove }) {
                   {budget ? (
                     <>
                       <span className="text-xs font-mono text-ink-600">
-                        {formatCurrency}
+                        {formatCurrency(budget)}
                       </span>
                       <button
                         onClick={() => startEdit(category)}
@@ -104,7 +107,7 @@ export default function BudgetManager({ budgets, onSave, onRemove }) {
                       </button>
                       <button
                         onClick={() => onRemove(category)}
-                        className=""
+                        className="text-xs text-ink-400 hover:text-rose-500 transition-colors"
                         aria-label={`Remove ${category} budget`}
                       >
                         ✕
@@ -124,6 +127,7 @@ export default function BudgetManager({ budgets, onSave, onRemove }) {
           );
         })}
       </div>
+
       {error && <p className="text-rose-500 text-xs mt-2">{error}</p>}
     </div>
   );

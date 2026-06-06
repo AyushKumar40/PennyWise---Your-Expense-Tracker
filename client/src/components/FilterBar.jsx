@@ -21,7 +21,7 @@ export default function FilterBar({ filters, setFilters }) {
     else if (presetId === "lastMonth") range = lastMonthRange();
     else if (presetId === "last7") range = last7DaysRange();
     else if (presetId === "all") range = { from: "", to: "" };
-    else range = { from: filters.from, to: filters.to }; // keep current for custom
+    else range = { from: filters.from, to: filters.to }; 
 
     setFilters((prev) => ({
       ...prev,
@@ -60,7 +60,6 @@ export default function FilterBar({ filters, setFilters }) {
           </select>
         </div>
 
-        {/* Date preset buttons */}
         <div className="flex-1">
           <label className="block text-xs font-medium text-ink-500 mb-1.5 uppercase tracking-wide">
             Period
@@ -82,7 +81,6 @@ export default function FilterBar({ filters, setFilters }) {
           </div>
         </div>
 
-        {/* Custom date inputs — shown always but highlighted when preset=custom */}
         <div className="flex gap-2 flex-shrink-0">
           <div>
             <label className="block text-xs font-medium text-ink-500 mb-1.5 uppercase tracking-wide">

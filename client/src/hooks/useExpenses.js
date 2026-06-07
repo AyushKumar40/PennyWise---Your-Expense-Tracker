@@ -20,7 +20,6 @@ export function useExpenses() {
   const [error, setError] = useState(null);
   const [submitting, setSubmitting] = useState(false);
 
-  // Fetch expenses and summary together whenever filters change
   const loadData = useCallback(async () => {
     setLoading(true);
     setError(null);
@@ -42,9 +41,7 @@ export function useExpenses() {
     try {
       const res = await api.fetchBudgets();
       setBudgets(res.data);
-    } catch {
-      //
-    }
+    } catch {}
   }, []);
 
   useEffect(() => {
@@ -55,6 +52,7 @@ export function useExpenses() {
     loadBudgets();
   }, [loadBudgets]);
 
+  // Expense CRUD
   async function addExpense(payload) {
     setSubmitting(true);
     try {
@@ -91,6 +89,7 @@ export function useExpenses() {
     }
   }
 
+  // Budget management
   async function updateBudget(category, amount) {
     try {
       await api.saveBudget(category, amount);
@@ -106,7 +105,7 @@ export function useExpenses() {
       await api.removeBudget(category);
       await loadBudgets();
     } catch {
-      //
+      // fail silently
     }
   }
 

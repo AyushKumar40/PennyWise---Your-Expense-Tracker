@@ -23,7 +23,7 @@ async function initDatabase() {
     db = new SQL.Database();
   }
 
-  // Tables
+  // Create tables
   db.run(`
     CREATE TABLE IF NOT EXISTS expenses (
       id          INTEGER PRIMARY KEY AUTOINCREMENT,

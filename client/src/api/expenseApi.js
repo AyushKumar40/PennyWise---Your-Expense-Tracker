@@ -13,9 +13,11 @@ async function request(path, options = {}) {
       data.errors?.join(", ") || data.message || `HTTP ${res.status}`;
     throw new Error(message);
   }
+
   return data;
 }
 
+// Expenses
 export async function fetchExpenses(filters = {}) {
   const params = new URLSearchParams();
   if (filters.category && filters.category !== "All")
@@ -52,8 +54,9 @@ export async function deleteExpense(id) {
   return request(`/expenses/${id}`, { method: "DELETE" });
 }
 
+// Budgets
 export async function fetchBudgets() {
-  return request("budgets");
+  return request("/budgets");
 }
 
 export async function saveBudget(category, amount) {

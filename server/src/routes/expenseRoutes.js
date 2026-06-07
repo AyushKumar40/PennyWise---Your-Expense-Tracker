@@ -6,7 +6,7 @@ const {
   validateBudget,
 } = require("../middleware/validateExpenses");
 
-// expense routes
+// Expense routes
 router.get("/expenses/summary", controller.getSummary);
 router.get("/expenses", controller.getExpenses);
 router.get("/expenses/:id", controller.getExpenseById);
@@ -14,10 +14,10 @@ router.post("/expenses", validateExpense, controller.createExpense);
 router.put("/expenses/:id", validateExpense, controller.updateExpense);
 router.delete("/expenses/:id", controller.deleteExpense);
 
-// category routes
+// Category routes
 router.get("/categories", controller.getCategories);
 
-// budget routes
+// Budget routes
 router.get("/budgets", controller.getBudgets);
 router.put("/budgets/:category", validateBudget, controller.upsertBudget);
 router.delete("/budgets/:category", controller.deleteBudget);

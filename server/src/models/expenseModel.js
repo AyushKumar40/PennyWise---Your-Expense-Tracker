@@ -7,7 +7,7 @@ const VALID_CATEGORIES = [
   "Entertainment",
   "Health",
   "Shopping",
-  "Others",
+  "Other",
 ];
 
 function toObjects(stmt) {
@@ -39,10 +39,10 @@ function getAllExpenses(filters = {}) {
     params[":to"] = to;
   }
 
-  const where = conditions.length > 0 ? `WHERE ${conditions.join("AND")}` : "";
+  const where =
+    conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
   const stmt = db.prepare(
-    `Select * FROM expenses ${where} ORDER BY date DESC,
-    created_at DESC`,
+    `SELECT * FROM expenses ${where} ORDER BY date DESC, created_at DESC`,
   );
   stmt.bind(params);
   return toObjects(stmt);
@@ -59,7 +59,7 @@ function getExpenseById(id) {
 function createExpense({ amount, category, date, note }) {
   const db = getDb();
   db.run(
-    "INSERT INTO expenses (amount, category, date, note) VALUES  (:amount, :category, :date, :note)",
+    "INSERT INTO expenses (amount, category, date, note) VALUES (:amount, :category, :date, :note)",
     {
       ":amount": amount,
       ":category": category,
@@ -79,10 +79,9 @@ function createExpense({ amount, category, date, note }) {
 function updateExpense(id, { amount, category, date, note }) {
   const db = getDb();
   db.run(
-    `UPDATE expenses 
-        SET amount = :amount, category = :category, date =:date,
-        note = :note
-        WHERE id = :id`,
+    `UPDATE expenses
+     SET amount = :amount, category = :category, date = :date, note = :note
+     WHERE id = :id`,
     {
       ":amount": amount,
       ":category": category,
@@ -114,18 +113,20 @@ function getSummary(from, to) {
     conditions.push("date <= :to");
     params[":to"] = to;
   }
-  const where = conditions.length ? `WHERE ${conditions.join("AND")}` : "";
+  const where = conditions.length ? `WHERE ${conditions.join(" AND ")}` : "";
 
   const categoryStmt = db.prepare(
-    `SELECT category, SUM(amount) as total, COUNT(*) as count FROM expenses ${where}
-    GROUP BY category
-    ORDER BY total DESC`,
+    `SELECT category, SUM(amount) as total, COUNT(*) as count
+     FROM expenses ${where}
+     GROUP BY category
+     ORDER BY total DESC`,
   );
   categoryStmt.bind(params);
   const byCategory = toObjects(categoryStmt);
 
   const totalStmt = db.prepare(
-    `SELECT SUM(amount) as grandTotal, MAX(amount) as highestExpense FROM expenses ${where}`,
+    `SELECT SUM(amount) as grandTotal, MAX(amount) as highestExpense
+     FROM expenses ${where}`,
   );
   totalStmt.bind(params);
   const totals = toObjects(totalStmt)[0] || {
